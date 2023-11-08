@@ -1,0 +1,29 @@
+
+/* HEADER */
+#selettore {height: 38px;}
+header {height: 38px;}
+
+
+#griglia {
+    height: 800px;
+    width: 800px;
+    margin: 2rem auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.quadrato {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+}
+
+/* selettore  */
+
+.dif1 {    height: calc(100% / 10);}
+.dif2 {    height: calc(100% / 9);}
+.dif3 {    height: calc(100% / 7);}
+.selected {    background-color: aqua;}
+#selettore {width: 10rem;}

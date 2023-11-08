@@ -1,8 +1,9 @@
 const start = document.getElementById("start");
 const container = document.getElementById("griglia");
-const pointBox = document.getElementById("punti");
 let celle;
 const nBombe = 16;
+// creazione contatore punti
+const pointBox = document.getElementById("punti");
 let point = 0;
 pointBox.innerText = "PUNTI: " + point;
 
@@ -47,6 +48,7 @@ function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBom
         square.addEventListener("click", function () {
             console.log(i);
             square.classList.toggle("selected");
+            // aggiunge "esplosione" al click / PUNTI
             if (square.classList.contains("bomb") == true) {
                 square.classList.add("bum");
             }
@@ -70,8 +72,12 @@ function genBombe() {
     let i = 1
     let bomba = [];
     do {
-        bomba.push(getRndInteger(1, celle));
-        i++
+        const rNum=getRndInteger(1, celle);
+        if (bomba.includes(rNum)) {}
+        else {
+            bomba.push(rNum);
+            i++
+        }
     } while (i <= nBombe)
     return bomba;
 }

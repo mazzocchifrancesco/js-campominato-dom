@@ -1,7 +1,9 @@
 const start = document.getElementById("start");
 const container = document.getElementById("griglia");
+const risultato = document.getElementById("gameResult");
 let celle;
 const nBombe = 16;
+let gameOver=0;
 // creazione contatore punti
 const pointBox = document.getElementById("punti");
 let point = 0;
@@ -21,15 +23,15 @@ start.addEventListener("click", function () {
     const bombList = genBombe();
     console.log(bombList);
     // genera celle
-    generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList, point)
-
-
+    generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList, point, pointBox)
+    risultato.innerText="";
+    gameOver=0;
 });
 
 // FUNZIONI
 
 // genera griglia
-function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBombe, contatorePunti) {
+function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBombe, contatorePunti, pointBox) {
     for (let i = 1; i <= celle; i++) {
         // crea elemento
         const square = document.createElement(elemento);
@@ -46,16 +48,22 @@ function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBom
         }
         // aggiunge evento click
         square.addEventListener("click", function () {
-            console.log(i);
-            square.classList.toggle("selected");
-            // aggiunge "esplosione" al click / PUNTI
-            if (square.classList.contains("bomb") == true) {
-                square.classList.add("bum");
-            }
-            else {
-                point++;
-                pointBox.innerText = "PUNTI: " + point;
-
+            // controlla se sei morto
+            if (gameOver==0) {
+                console.log(i);
+                square.classList.toggle("selected");
+                // aggiunge "esplosione" al click / PUNTI
+                if (square.classList.contains("bomb") == true) {
+                    square.classList.add("bum");
+                    // gameover
+                    gameOver=1;
+                    risultato.innerText="HAI PERSO";
+                }
+                else {
+                    contatorePunti++;
+                    pointBox.innerText = "PUNTI: " + contatorePunti;
+                    
+                }
             }
         })
     }
@@ -66,7 +74,7 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//   genera bombe
+//   genera bombe casuali e DIVERSE
 function genBombe() {
 
     let i = 1

@@ -31,3 +31,6 @@ header {height: 38px;}
 .bomb {
     border: 1px solid red;
 }
+.bum {
+    background-color: red;
+}

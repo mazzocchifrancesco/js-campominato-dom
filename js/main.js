@@ -17,7 +17,7 @@ start.addEventListener("click", function() {
     const bombList = genBombe ();
     console.log(bombList);
     // genera celle
-    generaGrid(container, "div", "quadrato", difficolta, celle, bombList)
+    generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList)
 
 
 });
@@ -25,7 +25,7 @@ start.addEventListener("click", function() {
 // FUNZIONI
 
 // genera griglia
-function generaGrid (contenitore, elemento, classe1, classe2, celle, arrayBombe) {
+function generaGridBomb (contenitore, elemento, classe1, classe2, celle, arrayBombe) {
     for (let i = 1; i <= celle; i++) {
         // crea elemento
         const square= document.createElement(elemento);
@@ -44,6 +44,9 @@ function generaGrid (contenitore, elemento, classe1, classe2, celle, arrayBombe)
         square.addEventListener("click", function() {
             console.log(i);
             square.classList.toggle("selected");
+            if (square.classList.contains("bomb")==true) {
+                square.classList.add("bum");
+            }
         })
     }
 }

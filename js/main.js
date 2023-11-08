@@ -26,6 +26,7 @@ start.addEventListener("click", function () {
     generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList, point, pointBox)
     risultato.innerText="";
     gameOver=0;
+    risultato.classList.remove("win","lost");
 });
 
 // FUNZIONI
@@ -58,10 +59,17 @@ function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBom
                     // gameover
                     gameOver=1;
                     risultato.innerText="HAI PERSO";
+                    risultato.classList.add("lost");
+
                 }
                 else {
                     contatorePunti++;
                     pointBox.innerText = "PUNTI: " + contatorePunti;
+                    // vittoria
+                    if (contatorePunti==celle-nBombe) {
+                        risultato.innerText="HAI VINTO";
+                        risultato.classList.add("win");
+                    }
                     
                 }
             }

@@ -29,8 +29,10 @@ header {height: 38px;}
 #selettore {width: 10rem;}
 
 .bomb {
-    border: 1px solid red;
+    color: red;
 }
 .bum {
     background-color: red;
 }
+.win {color: green;}
+.lost {color:red;}

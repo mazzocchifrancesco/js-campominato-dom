@@ -6,8 +6,7 @@ const nBombe = 16;
 let gameOver=0;
 // creazione contatore punti
 const pointBox = document.getElementById("punti");
-let point = 0;
-pointBox.innerText = "PUNTI: " + point;
+pointBox.innerText = "PUNTI: " + 0;
 
 // CLICK START
 
@@ -23,7 +22,7 @@ start.addEventListener("click", function () {
     const bombList = genBombe();
     console.log(bombList);
     // genera celle
-    generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList, point, pointBox)
+    generaGridBomb(container, "div", "quadrato", difficolta, celle, bombList, pointBox)
     risultato.innerText="";
     gameOver=0;
     risultato.classList.remove("win","lost");
@@ -32,7 +31,7 @@ start.addEventListener("click", function () {
 // FUNZIONI
 
 // genera griglia
-function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBombe, contatorePunti, pointBox) {
+function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBombe, pointBox) {
     for (let i = 1; i <= celle; i++) {
         // crea elemento
         const square = document.createElement(elemento);
@@ -48,7 +47,9 @@ function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBom
             square.classList.add("bomb");
         }
         // aggiunge evento click
+
         square.addEventListener("click", function () {
+
             // controlla se sei morto
             if (gameOver==0) {
                 console.log(i);
@@ -63,10 +64,12 @@ function generaGridBomb(contenitore, elemento, classe1, classe2, celle, arrayBom
 
                 }
                 else {
-                    contatorePunti++;
-                    pointBox.innerText = "PUNTI: " + contatorePunti;
+                    // conta classi selezionate
+                    let celleSelezionate=document.getElementsByClassName("selected").length;
+                    // aggiunge punti 
+                    pointBox.innerText = "PUNTI: " + celleSelezionate;
                     // vittoria
-                    if (contatorePunti==celle-nBombe) {
+                    if (celleSelezionate==celle-nBombe) {
                         risultato.innerText="HAI VINTO";
                         risultato.classList.add("win");
                     }
